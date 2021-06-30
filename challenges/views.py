@@ -5,7 +5,8 @@ from datetime import date, datetime
 
 
 class DetectingChange(TemplateView):
-    template_name = 'detecting-change.html'
+    template_name = 'challenge.html'
+    title = "Detecting Changes"
     dataset = [
         ("01/01/2020", False),
         ("01/02/2020", True),
@@ -41,7 +42,8 @@ class DetectingChange(TemplateView):
 
 
 class SeasonProblem(TemplateView):
-    template_name = 'detecting-change.html'
+    template_name = 'challenge.html'
+    title = "Seasons Problems"
     dataset = [
         ("113_8909896-6940269", "09/23/19", 1),
         ("114_0291773-7262677", "01/01/20", 1),
@@ -82,12 +84,13 @@ class SeasonProblem(TemplateView):
             else:
                 season = self.seasons[3][0]
             results.append((row[0], season))
-        context["results"] =  results
+        context["results"] = results
         return context
 
 
 class CustomOrderStatus(TemplateView):
-    template_name = 'detecting-change.html'
+    template_name = 'challenge.html'
+    title = "Custom Order Status"
     dataset = [
         ("ORD_1567", "LAPTOP", "SHIPPED"),
         ("ORD_1567", "MOUSE", "SHIPPED"),
@@ -112,6 +115,7 @@ class CustomOrderStatus(TemplateView):
         pending = False
         cancelled = 0
         order_counter = 0
+        previous_order = ""
         for row in self.dataset:
             if order == "":
                 order = row[0]
@@ -125,11 +129,11 @@ class CustomOrderStatus(TemplateView):
                     pass
             else:
                 if pending:
-                    results.append((row[0], "PENDING"))
+                    results.append((order, "PENDING"))
                 elif cancelled == order_counter:
-                    results.append((row[0], "CANCELLED"))
+                    results.append((order, "CANCELLED"))
                 else:
-                    results.append((row[0], "SHIPPED"))
+                    results.append((order, "SHIPPED"))
                 pending = False
                 cancelled = 0
                 order_counter = 1

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static  %}
+{% block contenido %}
+<h1 class="title">{{ view.title }}</h1>
+<div class="columns">
+    <div class="column is-6">
+        <table class="table is-striped is-center">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Was Rainy</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in results %}
+            <tr>
+                <th>{{ row.0 }}</th>
+                <td>{{ row.1 }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
